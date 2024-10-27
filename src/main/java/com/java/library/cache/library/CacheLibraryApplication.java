@@ -11,10 +11,25 @@ public class CacheLibraryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CacheLibraryApplication.class, args);
 
-		CacheManager<String, String> cacheManager = new CacheManager<>("LRU", 5, 0);
-		Cache<String, String> cache = cacheManager.getCache();
+		CacheManager<String, String> lru = new CacheManager<>("LRU", 5, 0);
+		Cache<String, String> lruCache = lru.getCache();
 
-		cache.put("key1", "samar");
-		System.out.println(cache.get("key1"));
+		lruCache.put("key1", "samar in LRU");
+		System.out.println(lruCache.get("key1"));
+
+		CacheManager<String, String> lfu = new CacheManager<>("LFU", 5, 0);
+		Cache<String, String> lfuCache = lfu.getCache();
+
+		lfuCache.put("key1", "samar in LFU");
+		System.out.println(lfuCache.get("key1"));
+
+		CacheManager<String, String> ttl = new CacheManager<>("TTL", 5, 50000);
+		Cache<String, String> ttlCache = ttl.getCache();
+
+		ttlCache.put("key1", "samar in TTL");
+		System.out.println(ttlCache.get("key1"));
+
+
+
 	}
 }
